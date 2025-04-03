@@ -44,5 +44,10 @@ namespace BookHavenStoreApp.Forms
         {
 
         }
+
+        private void dgvOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

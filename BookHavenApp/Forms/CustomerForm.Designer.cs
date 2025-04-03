@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
@@ -45,44 +46,42 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCustomers = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnClear = new System.Windows.Forms.Button();
-            this.txtCustomerId = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(154, 145);
+            this.txtAddress.Location = new System.Drawing.Point(154, 141);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtAddress.Size = new System.Drawing.Size(121, 20);
             this.txtAddress.TabIndex = 24;
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(154, 75);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(100, 20);
+            this.txtEmail.Size = new System.Drawing.Size(121, 20);
             this.txtEmail.TabIndex = 23;
             // 
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(154, 109);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(100, 20);
+            this.txtPhone.Size = new System.Drawing.Size(121, 20);
             this.txtPhone.TabIndex = 22;
             // 
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(154, 43);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 20);
+            this.txtName.Size = new System.Drawing.Size(121, 20);
             this.txtName.TabIndex = 21;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(42, 168);
+            this.btnSearch.Location = new System.Drawing.Point(46, 174);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(104, 23);
             this.btnSearch.TabIndex = 20;
@@ -102,7 +101,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(297, 41);
+            this.btnDelete.Location = new System.Drawing.Point(297, 75);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(104, 24);
             this.btnDelete.TabIndex = 18;
@@ -112,7 +111,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(297, 72);
+            this.btnAdd.Location = new System.Drawing.Point(297, 43);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(104, 23);
             this.btnAdd.TabIndex = 17;
@@ -179,8 +178,16 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCustomers.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCustomers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCustomers.Location = new System.Drawing.Point(42, 194);
+            this.dgvCustomers.Location = new System.Drawing.Point(42, 209);
             this.dgvCustomers.Name = "dgvCustomers";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCustomers.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCustomers.RowHeadersVisible = false;
             this.dgvCustomers.Size = new System.Drawing.Size(500, 139);
             this.dgvCustomers.TabIndex = 25;
@@ -215,31 +222,16 @@
             this.btnClear.TabIndex = 27;
             this.btnClear.Text = "Clear Feilds";
             this.btnClear.UseVisualStyleBackColor = true;
-            // 
-            // txtCustomerId
-            // 
-            this.txtCustomerId.Location = new System.Drawing.Point(154, 17);
-            this.txtCustomerId.Name = "txtCustomerId";
-            this.txtCustomerId.ReadOnly = true;
-            this.txtCustomerId.Size = new System.Drawing.Size(100, 20);
-            this.txtCustomerId.TabIndex = 28;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(68, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 29;
-            this.label5.Text = "Customer ID";
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(154, 171);
+            this.txtSearch.Location = new System.Drawing.Point(154, 174);
             this.txtSearch.Multiline = true;
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(100, 20);
+            this.txtSearch.Size = new System.Drawing.Size(121, 20);
             this.txtSearch.TabIndex = 30;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged_1);
             // 
             // CustomerForm
             // 
@@ -247,8 +239,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 373);
             this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtCustomerId);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.dgvCustomers);
             this.Controls.Add(this.txtAddress);
@@ -265,7 +255,7 @@
             this.Controls.Add(this.label1);
             this.Name = "CustomerForm";
             this.Text = "CustomerForm";
-            this.Load += new System.EventHandler(this.CustomerManagementForm_Load);
+            this.Load += new System.EventHandler(this.CustomerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -288,8 +278,6 @@
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvCustomers;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.TextBox txtCustomerId;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSearch;
     }
 }

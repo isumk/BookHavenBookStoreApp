@@ -194,5 +194,11 @@ namespace BookHavenStoreApp.Forms
         {
             BtnSearchBook_Click(sender, e);
         }
+
+        private void BookInventoryForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
