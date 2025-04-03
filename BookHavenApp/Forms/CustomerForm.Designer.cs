@@ -1,4 +1,4 @@
-﻿namespace BookHavenApp.Forms
+﻿namespace BookHavenStoreApp.Forms
 {
     partial class CustomerForm
     {
@@ -82,23 +82,23 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(297, 101);
+            this.btnSearch.Location = new System.Drawing.Point(42, 168);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(104, 23);
             this.btnSearch.TabIndex = 20;
             this.btnSearch.Text = "Search Customer";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(297, 132);
+            this.btnUpdate.Location = new System.Drawing.Point(297, 109);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(104, 23);
             this.btnUpdate.TabIndex = 19;
             this.btnUpdate.Text = "Update Customer";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+          
             // 
             // btnDelete
             // 
@@ -108,7 +108,7 @@
             this.btnDelete.TabIndex = 18;
             this.btnDelete.Text = "Delete Customer";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+          
             // 
             // btnAdd
             // 
@@ -118,7 +118,7 @@
             this.btnAdd.TabIndex = 17;
             this.btnAdd.Text = "Add Customer";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            
             // 
             // label4
             // 
@@ -168,7 +168,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCustomers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomers.ColumnHeadersHeight = 4;
+            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -178,10 +179,10 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCustomers.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCustomers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCustomers.Location = new System.Drawing.Point(48, 194);
+            this.dgvCustomers.Location = new System.Drawing.Point(42, 194);
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.RowHeadersVisible = false;
-            this.dgvCustomers.Size = new System.Drawing.Size(494, 139);
+            this.dgvCustomers.Size = new System.Drawing.Size(500, 139);
             this.dgvCustomers.TabIndex = 25;
             this.dgvCustomers.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvCustomers.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -194,7 +195,7 @@
             this.dgvCustomers.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvCustomers.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvCustomers.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvCustomers.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomers.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvCustomers.ThemeStyle.HeaderStyle.Height = 4;
             this.dgvCustomers.ThemeStyle.ReadOnly = false;
             this.dgvCustomers.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -204,11 +205,11 @@
             this.dgvCustomers.ThemeStyle.RowsStyle.Height = 22;
             this.dgvCustomers.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCustomers.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
+            
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(297, 161);
+            this.btnClear.Location = new System.Drawing.Point(297, 138);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(104, 23);
             this.btnClear.TabIndex = 27;
@@ -264,7 +265,6 @@
             this.Controls.Add(this.label1);
             this.Name = "CustomerForm";
             this.Text = "CustomerForm";
-            this.Load += new System.EventHandler(this.CustomerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

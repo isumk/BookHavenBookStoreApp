@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BookHavenApp.Properties
+namespace BookHavenStoreApp.Properties
 {
 
 

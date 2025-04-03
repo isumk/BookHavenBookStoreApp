@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookHavenApp.Models
+namespace BookHavenStoreApp.Models
 {
     public class Book
     {
@@ -15,6 +15,7 @@ namespace BookHavenApp.Models
         public string ISBN { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
+        public int ReorderLevel { get; set; }
     }
 
 }

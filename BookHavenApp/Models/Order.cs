@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookHavenApp.Models
+namespace BookHavenStoreApp.Models
 {
     public class Order
     {
@@ -19,7 +19,7 @@ namespace BookHavenApp.Models
         public string Name { get; set; } // Completed or Pending
 
         //OrderItems property to hold the list of items in the order
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public List<OrderItem> OrderItems { get; set; }
     }
 
 }

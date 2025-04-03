@@ -1,4 +1,4 @@
-﻿namespace BookHavenApp.Forms
+﻿namespace BookHavenStoreApp.Forms
 {
     partial class SelectCustomerForm
     {
@@ -84,7 +84,7 @@
             this.dgvCustomers.ThemeStyle.RowsStyle.Height = 22;
             this.dgvCustomers.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCustomers.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
+            
             // 
             // btnSelect
             // 
@@ -99,7 +99,7 @@
             this.btnSelect.Size = new System.Drawing.Size(119, 27);
             this.btnSelect.TabIndex = 1;
             this.btnSelect.Text = "Select Customer";
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+           
             // 
             // SelectCustomerForm
             // 
@@ -110,7 +110,7 @@
             this.Controls.Add(this.dgvCustomers);
             this.Name = "SelectCustomerForm";
             this.Text = "SelectCustomerForm";
-            this.Load += new System.EventHandler(this.SelectCustomerForm_Load);
+            
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
 

@@ -1,31 +1,27 @@
-﻿using BookHavenApp.DataAccess;
-using BookHavenApp.Models;
+﻿
+using BookHavenStoreApp.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BookHavenApp.Forms;
-using BookHavenApp.Helpers;
-using System.Configuration;
+using BookHavenStoreApp.Forms;
+using BookHavenStoreApp.Helpers;
+using BookHavenStoreApp.Helpers;
+using BookHavenStoreApp.Models;
+using BookHavenStoreApp.DataAccess;
 
-namespace BookHavenApp.Forms
+
+namespace BookHavenStoreApp.Forms
 {
     public partial class LoginForm: Form
     {
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public LoginForm()
         {
             InitializeComponent();
-            lblError.Visible = false;
-        }
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -36,8 +32,7 @@ namespace BookHavenApp.Forms
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                lblError.Text = "Please enter both username and password.";
-                lblError.Visible = true;
+                MessageBox.Show("Incorrect password.");
                 return;
             }
 
@@ -46,14 +41,14 @@ namespace BookHavenApp.Forms
                 using (SqlConnection conn = Database.GetConnection())
                 {
                     conn.Open();
-                    string query = "SELECT UserId, Username, PasswordHash, Role FROM Users WHERE Username = @Username";
+                    string query = "SELECT UserId, Username, Password, Role FROM Users WHERE Username = @Username";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Username", username);
                         SqlDataReader reader = cmd.ExecuteReader();
                         if (reader.Read())
                         {
-                            string storedHash = reader["PasswordHash"].ToString();
+                            string storedHash = reader["Password"].ToString();
                             if (SecurityHelper.VerifyPassword(password, storedHash))
                             {
                                 // Login successful
@@ -61,34 +56,34 @@ namespace BookHavenApp.Forms
                                 {
                                     UserId = Convert.ToInt32(reader["UserId"]),
                                     Username = reader["Username"].ToString(),
-                                    Role = reader["Role"].ToString()
+                                    Role = reader["Role"].ToString() // Store the role here
                                 };
 
-                                // Open MainForm with user info
+                                // Open MainForm with the User object
                                 this.Hide();
-                                MainForm mainForm = new MainForm(loggedInUser.Role);
+                                MainForm mainForm = new MainForm(loggedInUser); // Pass User object instead of string
                                 mainForm.Show();
                             }
                             else
                             {
-                                lblError.Text = "Incorrect password.";
-                                lblError.Visible = true;
+                                MessageBox.Show("Incorrect password.");
                             }
                         }
                         else
                         {
-                            lblError.Text = "User not found.";
-                            lblError.Visible = true;
+                            MessageBox.Show("User not found.");
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                lblError.Text = $"Login error: {ex.Message}";
-                lblError.Visible = true;
+                MessageBox.Show($"Login error: {ex.Message}");
             }
         }
     }
 }
+    
+    
+
  

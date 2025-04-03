@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookHavenApp.Models
+namespace BookHavenStoreApp.Models
 {
     public class OrderItem
     {

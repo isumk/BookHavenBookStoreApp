@@ -1,4 +1,4 @@
-﻿namespace BookHavenApp.Forms
+﻿namespace BookHavenStoreApp.Forms
 {
     partial class SplashScreen
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookHavenApp.Resources.Images
+namespace BookHavenStoreApp.Resources.Images
 {
     class Colors
     {

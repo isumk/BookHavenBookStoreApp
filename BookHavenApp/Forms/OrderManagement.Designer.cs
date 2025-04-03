@@ -1,6 +1,6 @@
 ﻿namespace BookHavenStoreApp.Forms
 {
-    partial class AdminDashboardForm
+    partial class OrderManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // AdminDashboardForm
+            // OrderManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 450);
-            this.Name = "AdminDashboardForm";
-            this.Text = "AdminDashboardForm";
+            this.ClientSize = new System.Drawing.Size(570, 424);
+            this.Name = "OrderManagement";
+            this.Text = "OrderManagement";
             this.ResumeLayout(false);
 
         }

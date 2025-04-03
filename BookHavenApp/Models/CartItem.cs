@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookHavenApp;
+using BookHavenStoreApp;
 
-namespace BookHavenApp.Models
+namespace BookHavenStoreApp.Models
 {
     namespace BookHavenApp.Models
     {

@@ -177,13 +177,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BookHavenStoreDBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\BookDataAccess.cs" />
-    <Compile Include="DataAccess\CustomerDataAccess.cs" />
-    <Compile Include="DataAccess\Database.cs" />
-    <Compile Include="DataAccess\OrderDataAccess.cs" />
-    <Compile Include="DataAccess\SalesDataAccess.cs" />
-    <Compile Include="DataAccess\SupplierDataAccess.cs" />
-    <Compile Include="DataAccess\UserDataAccess.cs" />
+    <Compile Include="DataAccess\BookRepository.cs" />
+    <Compile Include="DataAccess\SupplierOrderRepository.cs" />
+    <Compile Include="DataAccess\SupplierRepository.cs" />
     <Compile Include="Forms\AdminDashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,17 +210,11 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OrderManagementForm.cs">
+    <Compile Include="Forms\OrderManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\OrderManagementForm.Designer.cs">
-      <DependentUpon>OrderManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ReciptPreveiwForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ReciptPreveiwForm.Designer.cs">
-      <DependentUpon>ReciptPreveiwForm.cs</DependentUpon>
+    <Compile Include="Forms\OrderManagement.Designer.cs">
+      <DependentUpon>OrderManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ReportsForm.cs">
       <SubType>Form</SubType>
@@ -237,12 +227,6 @@
     </Compile>
     <Compile Include="Forms\SalesPOSForm.Designer.cs">
       <DependentUpon>SalesPOSForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CartPopupForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CartPopupForm.Designer.cs">
-      <DependentUpon>CartPopupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SelectCustomerForm.cs">
       <SubType>Form</SubType>
@@ -262,25 +246,18 @@
     <Compile Include="Forms\SupplierForm.Designer.cs">
       <DependentUpon>SupplierForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\PdfGenerator.cs" />
+    <Compile Include="Helpers\Database.cs" />
+    <Compile Include="Helpers\DatabaseHelper.cs" />
     <Compile Include="Helpers\SecurityHelper.cs" />
-    <Compile Include="Helpers\Utility.cs" />
-    <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\BookRepo.cs" />
-    <Compile Include="Models\BookRepository.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\CustomerRepo.cs" />
-    <Compile Include="Models\CustomerRepository.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
-    <Compile Include="Models\OrderRepo.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\SaleItem.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupplierOrder.cs" />
-    <Compile Include="Models\SupplierRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -289,6 +266,9 @@
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\SalesService.cs" />
     <Compile Include="Services\SecurityService.cs" />
+    <EmbeddedResource Include="Forms\AdminDashboardForm.resx">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BookInventoryForm.resx">
       <DependentUpon>BookInventoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,17 +281,11 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OrderManagementForm.resx">
-      <DependentUpon>OrderManagementForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ReciptPreveiwForm.resx">
-      <DependentUpon>ReciptPreveiwForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\OrderManagement.resx">
+      <DependentUpon>OrderManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SalesPOSForm.resx">
       <DependentUpon>SalesPOSForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CartPopupForm.resx">
-      <DependentUpon>CartPopupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SelectCustomerForm.resx">
       <DependentUpon>SelectCustomerForm.cs</DependentUpon>

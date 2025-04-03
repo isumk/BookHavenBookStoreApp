@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BookHavenApp.Forms
+namespace BookHavenStoreApp.Forms
 {
     public partial class AdminDashboardForm: Form
     {

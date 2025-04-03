@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BookHavenStoreApp.Forms
 {
-    public partial class ReportsForm: Form
+    public partial class OrderManagement: Form
     {
-        public ReportsForm()
+        public OrderManagement()
         {
             InitializeComponent();
         }

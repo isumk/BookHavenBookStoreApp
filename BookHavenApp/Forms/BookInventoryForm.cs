@@ -1,141 +1,198 @@
-﻿using BookHavenApp.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using BookHavenStoreApp.DataAccess;
+using BookHavenStoreApp.Models;
 
-namespace BookHavenApp.Forms
+namespace BookHavenStoreApp.Forms
 {
-    public partial class BookInventoryForm: Form
+    public partial class BookInventoryForm : Form
     {
+        private readonly BookRepository bookRepo = new BookRepository();//Create an Instance
+
         public BookInventoryForm()
         {
             InitializeComponent();
+            LoadBooks(); // Load books on form load
+            PopulateCategories(); // Load categories into ComboBox
         }
 
-        private void BookInventoryForm_Load(object sender, EventArgs e)
-        {
-            // Load books from the database when the form is loaded
-            LoadBooks();
-        }
         private void LoadBooks()
         {
-            // Fetch books from the database and bind to the DataGridView
-            dgvBooks.DataSource = BookRepository.GetBooks(txtSearch.Text);
-           
+            dgvBooks.DataSource = bookRepo.GetAllBooks();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void PopulateCategories()
         {
-            // Add new book from the fields in the form
-            var newBook = new Book
+            cmbCategory.Items.Clear();
+            cmbCategory.Items.AddRange(new string[]
             {
-                Title = txtTitle.Text,
-                Author = txtAuthor.Text,
-                Genre = txtGenre.Text,
-                ISBN = txtISBN.Text,
-                Price = decimal.Parse(txtPrice.Text),
-                StockQuantity = int.Parse(txtQuantity.Text)
-            };
-
-            BookRepository.AddBook(newBook);
-            MessageBox.Show("Book Added Successfully");
-            LoadBooks(); // Reload the book list after adding
-
-            if (BookRepository.BookCodeExists(txtISBN.Text))
-            {
-                MessageBox.Show("A book with this Book Code already exists.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+                "Fiction", "Non-fiction", "Mystery", "Fantasy", "Sci-Fi",
+                "Biography", "Romance", "Thriller", "History"
+            });
         }
 
 
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            // Get the selected book from the DataGridView
-            var selectedBook = dgvBooks.SelectedRows[0].DataBoundItem as Book;
-            if (selectedBook != null)
-            {
-                // Update the selected book
-                selectedBook.Title = txtTitle.Text;
-                selectedBook.Author = txtAuthor.Text;
-                selectedBook.Genre = txtGenre.Text;
-                selectedBook.ISBN = txtISBN.Text;
-                selectedBook.Price = decimal.Parse(txtPrice.Text);
-                selectedBook.StockQuantity = int.Parse(txtQuantity.Text);
+        
 
-                BookRepository.UpdateBook(selectedBook);
-                MessageBox.Show("Book Updated Successfully");
-                LoadBooks(); // Reload the book list after updating
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            // Get the selected book from the DataGridView
-            var selectedBook = dgvBooks.SelectedRows[0].DataBoundItem as Book;
-            if (selectedBook != null)
-            {
-                // Confirm delete
-                var result = MessageBox.Show("Are you sure you want to delete this book?", "Confirm Delete", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    // Delete the book
-                    BookRepository.DeleteBook(selectedBook.BookId);
-                    MessageBox.Show("Book Deleted Successfully");
-                    LoadBooks(); // Reload the book list after deletion
-                }
-            }
-        }
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            // Reload books with the search filter
-            LoadBooks();
-        }
-
-        private void dgvBooks_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // When a row is clicked, populate the textboxes with the selected book's data
-            if (e.RowIndex >= 0)
-            {
-                var selectedBook = dgvBooks.Rows[e.RowIndex].DataBoundItem as Book;
-                if (selectedBook != null)
-                {
-                    txtTitle.Text = selectedBook.Title;
-                    txtAuthor.Text = selectedBook.Author;
-                    txtGenre.Text = selectedBook.Genre;
-                    txtISBN.Text = selectedBook.ISBN;
-                    txtPrice.Text = selectedBook.Price.ToString();
-                    txtQuantity.Text = selectedBook.StockQuantity.ToString();
-                }
-            }
-        }
-
-        private void txtSearch_TextChanged_1(object sender, EventArgs e)
-        {
-            LoadBooks(); // Refresh the book list whenever the search text changes
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ClearFields();
-        }
         private void ClearFields()
         {
             txtISBN.Clear();
             txtTitle.Clear();
             txtAuthor.Clear();
+            cmbCategory.SelectedIndex = -1;
             txtPrice.Clear();
-            txtQuantity.Clear();
-            txtSearch.Clear();
-            txtGenre.Clear();
+            txtStock.Clear();
         }
 
+        private bool ValidateInputs()
+        {
+            if (string.IsNullOrWhiteSpace(txtISBN.Text) ||
+                string.IsNullOrWhiteSpace(txtTitle.Text) ||
+                string.IsNullOrWhiteSpace(txtAuthor.Text) ||
+                cmbCategory.SelectedItem == null ||
+                !decimal.TryParse(txtPrice.Text, out _) ||
+                !int.TryParse(txtStock.Text, out _))
+            {
+                MessageBox.Show("Please fill in all fields correctly.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (ValidateInputs())
+            {
+                Book book = new Book
+                {
+                    ISBN = txtISBN.Text.Trim(),
+                    Title = txtTitle.Text.Trim(),
+                    Author = txtAuthor.Text.Trim(),
+                    Genre = cmbCategory.SelectedItem?.ToString(),
+                    Price = Convert.ToDecimal(txtPrice.Text),
+                    StockQuantity = Convert.ToInt32(txtStock.Text)
+                };
+
+                bool success = bookRepo.AddBook(book);
+                if (success)
+                {
+                    MessageBox.Show("Book added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBooks();
+                    ClearFields();
+                }
+                else
+                {
+                    MessageBox.Show("Error adding book.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void dgvBooks_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvBooks.Rows[e.RowIndex];
+
+                txtISBN.Text = row.Cells["ISBN"].Value.ToString();
+                txtTitle.Text = row.Cells["Title"].Value.ToString();
+                txtAuthor.Text = row.Cells["Author"].Value.ToString();
+                cmbCategory.SelectedItem = row.Cells["Genre"].Value.ToString();
+                txtPrice.Text = row.Cells["Price"].Value.ToString();
+                txtStock.Text = row.Cells["StockQuantity"].Value.ToString();
+            }
+        }
+
+        private void BtnSearchBook_Click(object sender, EventArgs e)
+        {
+            string searchText = txtSearch.Text.Trim();
+            if (string.IsNullOrEmpty(searchText))
+            {
+                MessageBox.Show("Please enter a title, author, or ISBN to search.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LoadBooks(); // Reload all books if search text is empty
+                return;
+            }
+
+            dgvBooks.DataSource = bookRepo.SearchBooks(searchText);
+
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvBooks.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a book to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int bookId = Convert.ToInt32(dgvBooks.SelectedRows[0].Cells["BookId"].Value);
+            DialogResult confirm = MessageBox.Show("Are you sure you want to delete this book?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                bool success = bookRepo.DeleteBook(bookId);
+                if (success)
+                {
+                    MessageBox.Show("Book deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBooks();
+                    ClearFields();
+                }
+                else
+                {
+                    MessageBox.Show("Error deleting book.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgvBooks.SelectedRows.Count == 0)
+            {
+               
+                MessageBox.Show("Please select a book to update from the list.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (ValidateInputs())
+            {
+                int bookId = Convert.ToInt32(dgvBooks.SelectedRows[0].Cells["BookId"].Value);
+
+                Book book = new Book
+                {
+                    BookId = bookId,
+                    ISBN = txtISBN.Text.Trim(),
+                    Title = txtTitle.Text.Trim(),
+                    Author = txtAuthor.Text.Trim(),
+                    Genre = cmbCategory.SelectedItem?.ToString(),
+                    Price = Convert.ToDecimal(txtPrice.Text),
+                    StockQuantity = Convert.ToInt32(txtStock.Text)
+                };
+
+                bool success = bookRepo.UpdateBook(book);
+                if (success)
+                {
+                    MessageBox.Show("Book updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBooks();
+                    ClearFields();
+                }
+                else
+                {
+                    MessageBox.Show("Error updating book.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ClearFields();
+        }
+
+        private void txtSearch_TextChanged_1(object sender, EventArgs e)
+        {
+            BtnSearchBook_Click(sender, e);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BookHavenApp.Models;
+﻿using BookHavenStoreApp.DataAccess;
+using BookHavenStoreApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,21 +10,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BookHavenApp.Forms
+namespace BookHavenStoreApp.Forms
 {
-    public partial class SupplierForm: Form
+    public partial class SupplierForm : Form
     {
-        private SupplierRepository supplierRepo = new SupplierRepository();
-        private int selectedSupplierId = -1;
+        private readonly SupplierRepository supplierRepo = new SupplierRepository();
 
         public SupplierForm()
         {
             InitializeComponent();
             LoadSuppliers();
+            LoadOrders();
+            LoadBooks();
         }
+
         private void LoadSuppliers()
         {
-            dgvSuppliers.DataSource = supplierRepo.GetAllSuppliers();
+            DataTable suppliers = supplierRepo.GetAllSuppliers();
+            dgvSuppliers.DataSource = suppliers;
+            cmbSupplier.DataSource = suppliers;
+            cmbSupplier.DisplayMember = "Name";
+            cmbSupplier.ValueMember = "SupplierID";
+        }
+        private void LoadBooks()
+        {
+            BookRepository bookRepo = new BookRepository();
+            List<BookHavenStoreApp.Models.Book> books = bookRepo.GetAllBooks();
+            cmbBook.DataSource = books;
+            cmbBook.DisplayMember = "Title";
+            cmbBook.ValueMember = "BookID";
+        }
+
+        private void LoadOrders()
+        {
+            dgvOrders.DataSource = supplierRepo.GetSupplierOrders();
         }
 
         private void SupplierForm_Load(object sender, EventArgs e)
@@ -31,94 +51,107 @@ namespace BookHavenApp.Forms
 
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddSupplier_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtPhone.Text))
-            {
-                MessageBox.Show("Name and Phone are required.");
-                return;
-            }
-
             Supplier supplier = new Supplier
             {
-                Name = txtName.Text,
+                Name = txtSupplierName.Text,
+                Phone = txtContact.Text,
                 Email = txtEmail.Text,
-                Phone = txtPhone.Text,
                 Address = txtAddress.Text
             };
 
-            supplierRepo.AddSupplier(supplier);
-            LoadSuppliers();
-            ClearFields();
-            MessageBox.Show("Supplier added successfully!");
+            if (supplierRepo.AddSupplier(supplier))
+            {
+                MessageBox.Show("Supplier added successfully!");
+                LoadSuppliers();
+            }
+            else
+            {
+                MessageBox.Show("Error adding supplier.");
+            }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnUpdateSupplier_Click(object sender, EventArgs e)
         {
-            if (selectedSupplierId == -1)
-            {
-                MessageBox.Show("Please select a supplier to update.");
-                return;
-            }
-
             Supplier supplier = new Supplier
             {
-                SupplierId = selectedSupplierId,
-                Name = txtName.Text,
+                SupplierID = Convert.ToInt32(dgvSuppliers.SelectedRows[0].Cells["SupplierID"].Value),
+                Name = txtSupplierName.Text,
+                Phone = txtContact.Text,
                 Email = txtEmail.Text,
-                Phone = txtPhone.Text,
                 Address = txtAddress.Text
             };
 
-            supplierRepo.UpdateSupplier(supplier);
-            LoadSuppliers();
-            ClearFields();
-            MessageBox.Show("Supplier updated successfully!");
+            if (supplierRepo.UpdateSupplier(supplier))
+            {
+                MessageBox.Show("Supplier updated successfully!");
+                LoadSuppliers();
+            }
+            else
+            {
+                MessageBox.Show("Error updating supplier.");
+            }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDeleteSupplier_Click(object sender, EventArgs e)
         {
-            if (selectedSupplierId == -1)
+            int supplierId = Convert.ToInt32(dgvSuppliers.SelectedRows[0].Cells["SupplierID"].Value);
+            if (supplierRepo.DeleteSupplier(supplierId))
             {
-                MessageBox.Show("Please select a supplier to delete.");
+                MessageBox.Show("Supplier deleted successfully!");
+                LoadSuppliers();
+            }
+            else
+            {
+                MessageBox.Show("Error deleting supplier.");
+            }
+        }
+
+        private void btnMarkAsReceived_Click(object sender, EventArgs e)
+        {
+            int orderId = Convert.ToInt32(dgvOrders.SelectedRows[0].Cells["OrderID"].Value);
+            int bookId = Convert.ToInt32(dgvOrders.SelectedRows[0].Cells["BookID"].Value);
+            int quantity = Convert.ToInt32(dgvOrders.SelectedRows[0].Cells["Quantity"].Value);
+
+            if (supplierRepo.MarkOrderAsReceived(orderId, bookId, quantity))
+            {
+                MessageBox.Show("Stock updated successfully!");
+                LoadOrders();
+            }
+            else
+            {
+                MessageBox.Show("Error updating stock.");
+            }
+        }
+
+        private void btnPlaceOrder_Click(object sender, EventArgs e)
+        {
+            if (cmbSupplier.SelectedItem == null || cmbBook.SelectedItem == null || string.IsNullOrEmpty(txtQuantity.Text))
+            {
+                MessageBox.Show("Please select a supplier, book, and enter quantity.");
                 return;
             }
 
-            supplierRepo.DeleteSupplier(selectedSupplierId);
-            LoadSuppliers();
-            ClearFields();
-            MessageBox.Show("Supplier deleted successfully!");
-        }
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearFields();
-        }
-        private void ClearFields()
-        {
-            txtName.Clear();
-            txtEmail.Clear();
-            txtPhone.Clear();
-            txtAddress.Clear();
-            txtSearch.Clear();
-            selectedSupplierId = -1;
-        }
+            int supplierId = Convert.ToInt32(cmbSupplier.SelectedValue);
+            int bookId = Convert.ToInt32(cmbBook.SelectedValue);
+            int quantity;
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            string keyword = txtSearch.Text.Trim();
-            dgvSuppliers.DataSource = supplierRepo.SearchSuppliers(keyword);
-        }
-
-        private void dgvSuppliers_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
+            if (!int.TryParse(txtQuantity.Text, out quantity) || quantity <= 0)
             {
-                DataGridViewRow row = dgvSuppliers.Rows[e.RowIndex];
-                selectedSupplierId = Convert.ToInt32(row.Cells["SupplierId"].Value);
-                txtName.Text = row.Cells["Name"].Value.ToString();
-                txtEmail.Text = row.Cells["Email"].Value.ToString();
-                txtPhone.Text = row.Cells["Phone"].Value.ToString();
-                txtAddress.Text = row.Cells["Address"].Value.ToString();
+                MessageBox.Show("Please enter a valid quantity.");
+                return;
+            }
+
+            bool success = supplierRepo.PlaceSupplierOrder(supplierId, bookId, quantity);
+            if (success)
+            {
+                MessageBox.Show("Order placed successfully!");
+                LoadOrders();
+            }
+            else
+            {
+                MessageBox.Show("Error placing order.");
             }
         }
     }

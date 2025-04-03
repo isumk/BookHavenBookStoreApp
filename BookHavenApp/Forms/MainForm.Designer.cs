@@ -1,4 +1,4 @@
-﻿namespace BookHavenApp.Forms
+﻿namespace BookHavenStoreApp.Forms
 {
     partial class MainForm
     {
@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.sidebarPanel = new System.Windows.Forms.Panel();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.btnReports = new Guna.UI2.WinForms.Guna2Button();
             this.btnSuppliers = new Guna.UI2.WinForms.Guna2Button();
@@ -38,15 +40,17 @@
             this.btnBooks = new Guna.UI2.WinForms.Guna2Button();
             this.btnDashboard = new Guna.UI2.WinForms.Guna2Button();
             this.topBarPanel = new System.Windows.Forms.Panel();
-            this.panelContainer = new System.Windows.Forms.Panel();
             this.lblUserRole = new System.Windows.Forms.Label();
+            this.panelContainer = new System.Windows.Forms.Panel();
             this.sidebarPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.topBarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // sidebarPanel
             // 
-            this.sidebarPanel.BackColor = System.Drawing.Color.DarkGray;
+            this.sidebarPanel.BackColor = System.Drawing.Color.Bisque;
+            this.sidebarPanel.Controls.Add(this.guna2PictureBox1);
             this.sidebarPanel.Controls.Add(this.btnLogout);
             this.sidebarPanel.Controls.Add(this.btnReports);
             this.sidebarPanel.Controls.Add(this.btnSuppliers);
@@ -60,6 +64,18 @@
             this.sidebarPanel.Name = "sidebarPanel";
             this.sidebarPanel.Size = new System.Drawing.Size(194, 481);
             this.sidebarPanel.TabIndex = 0;
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(32, 3);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(128, 64);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox1.TabIndex = 0;
+            this.guna2PictureBox1.TabStop = false;
             // 
             // btnLogout
             // 
@@ -196,7 +212,6 @@
             this.btnDashboard.Size = new System.Drawing.Size(169, 45);
             this.btnDashboard.TabIndex = 0;
             this.btnDashboard.Text = "Dashboard";
-            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // topBarPanel
             // 
@@ -207,14 +222,6 @@
             this.topBarPanel.Size = new System.Drawing.Size(606, 40);
             this.topBarPanel.TabIndex = 1;
             // 
-            // panelContainer
-            // 
-            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContainer.Location = new System.Drawing.Point(194, 40);
-            this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(606, 441);
-            this.panelContainer.TabIndex = 2;
-            // 
             // lblUserRole
             // 
             this.lblUserRole.AutoSize = true;
@@ -223,6 +230,15 @@
             this.lblUserRole.Size = new System.Drawing.Size(35, 13);
             this.lblUserRole.TabIndex = 0;
             this.lblUserRole.Text = "label1";
+            // 
+            // panelContainer
+            // 
+            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContainer.Location = new System.Drawing.Point(194, 40);
+            this.panelContainer.Name = "panelContainer";
+            this.panelContainer.Size = new System.Drawing.Size(606, 441);
+            this.panelContainer.TabIndex = 2;
+            this.panelContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContainer_Paint);
             // 
             // MainForm
             // 
@@ -236,6 +252,7 @@
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.topBarPanel.ResumeLayout(false);
             this.topBarPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -256,5 +273,6 @@
         private Guna.UI2.WinForms.Guna2Button btnBooks;
         private Guna.UI2.WinForms.Guna2Button btnDashboard;
         private System.Windows.Forms.Label lblUserRole;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
     }
 }

@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace BookHavenApp {
+namespace BookHavenStoreApp {
     
     
     /// <summary>
@@ -5049,7 +5049,7 @@ namespace BookHavenApp {
         }
     }
 }
-namespace BookHavenApp.BookHavenStoreDBDataSetTableAdapters {
+namespace BookHavenStoreApp.BookHavenStoreDBDataSetTableAdapters {
     
     
     /// <summary>
@@ -5230,7 +5230,7 @@ SELECT BookID, Title, Author, Genre, ISBN, Price, StockQuantity FROM Books WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5652,7 +5652,7 @@ SELECT CustomerID, Name, Contact, Email, Address FROM Customers WHERE (CustomerI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6073,7 +6073,7 @@ SELECT OrderItemID, OrderID, BookID, Quantity, Price, Subtotal FROM OrderItems W
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6417,7 +6417,7 @@ SELECT OrderID, CustomerID, OrderDate, OrderStatus, TotalAmount FROM Orders WHER
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6794,7 +6794,7 @@ SELECT SaleItemID, SaleID, BookID, Quantity, Price, Subtotal FROM SaleItems WHER
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7144,7 +7144,7 @@ SELECT SaleID, CustomerID, SaleDate, TotalAmount, Discount, NetAmount FROM Sales
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7534,7 +7534,7 @@ SELECT SupplierOrderID, SupplierID, BookID, Quantity, OrderDate FROM SupplierOrd
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7895,7 +7895,7 @@ SELECT SupplierID, SupplierName, ContactPerson, Contact, Address, Email FROM Sup
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8337,7 +8337,7 @@ SELECT UserID, Username, PasswordHash, Role FROM Users WHERE (UserID = @UserID)"
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BookHavenApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
+            this._connection.ConnectionString = global::BookHavenStoreApp.Properties.Settings.Default.BookHavenStoreDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

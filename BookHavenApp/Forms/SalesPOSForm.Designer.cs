@@ -1,4 +1,4 @@
-﻿namespace BookHavenApp.Forms
+﻿namespace BookHavenStoreApp.Forms
 {
     partial class SalesPOSForm
     {
@@ -64,7 +64,7 @@
             this.btnRemoveItem.TabIndex = 15;
             this.btnRemoveItem.Text = "Remove Item";
             this.btnRemoveItem.UseVisualStyleBackColor = true;
-            this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
+            
             // 
             // btnCheckout
             // 
@@ -74,7 +74,7 @@
             this.btnCheckout.TabIndex = 14;
             this.btnCheckout.Text = "Checkout";
             this.btnCheckout.UseVisualStyleBackColor = true;
-            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
+           
             // 
             // btnAddBook
             // 
@@ -84,7 +84,7 @@
             this.btnAddBook.TabIndex = 13;
             this.btnAddBook.Text = "Add Books To Cart";
             this.btnAddBook.UseVisualStyleBackColor = true;
-            this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
+         
             // 
             // label2
             // 
