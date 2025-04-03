@@ -58,7 +58,7 @@ namespace BookHavenStoreApp.Forms
 
         private void btnOrders_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new OrderManagement());
+            OpenChildForm(new OrderManagementForm());
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

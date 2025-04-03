@@ -212,6 +212,12 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderCartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderCartForm.Designer.cs">
+      <DependentUpon>OrderCartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OrderManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderCartForm.resx">
+      <DependentUpon>OrderCartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderManagement.resx">
       <DependentUpon>OrderManagement.cs</DependentUpon>

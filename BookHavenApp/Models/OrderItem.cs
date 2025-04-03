@@ -14,7 +14,11 @@ namespace BookHavenStoreApp.Models
         public string BookTitle { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-        public decimal Total => Quantity * Price;
+        public decimal Total
+        {
+            get { return Quantity * Price; } // ✅ Read-only and auto-calculated
+        }
+
     }
 
 

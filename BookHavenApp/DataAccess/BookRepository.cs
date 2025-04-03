@@ -193,5 +193,34 @@ namespace BookHavenStoreApp.DataAccess
 
             return books;
         }
+        public Book GetBookByID(int bookID)
+        {
+            Book book = null;
+            string query = "SELECT * FROM Books WHERE BookID = @BookID";
+
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@BookID", bookID);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            book = new Book
+                            {
+                                BookId = Convert.ToInt32(reader["BookID"]),
+                                Title = reader["Title"].ToString(),
+                                Price = Convert.ToDecimal(reader["Price"]),
+                                StockQuantity = Convert.ToInt32(reader["StockQuantity"])
+                            };
+                        }
+                    }
+                }
+            }
+            return book;
+        }
+
     }
 }
