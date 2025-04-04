@@ -120,5 +120,10 @@ namespace BookHavenStoreApp.Forms
         {
             return cartItems;
         }
+
+        private void dgvBookList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

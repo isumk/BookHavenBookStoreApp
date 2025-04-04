@@ -14,6 +14,8 @@ namespace BookHavenStoreApp.Models
         public string Status { get; set; }
         public decimal FinalAmount { get; set; }
         public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public decimal Discount { get; set; }
+
     }
 
 

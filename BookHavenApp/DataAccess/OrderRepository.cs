@@ -198,5 +198,63 @@ namespace BookHavenStoreApp.DataAccess
                 return rowsAffected > 0;
             }
         }
+
+
+
+
+
+
+
+        public int AddOrder(Order order, List<OrderItem> items)
+        {
+            int newOrderId = 0;
+            using (SqlConnection conn = new SqlConnection(Database.GetConnectionString()))
+            {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(@"INSERT INTO Orders (CustomerID, OrderDate, Status, FinalAmount, Discount)
+                                              OUTPUT INSERTED.OrderID
+                                              VALUES (@CustomerID, @OrderDate, @Status, @FinalAmount, @Discount)", conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@CustomerID", order.CustomerID);
+                    cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
+                    cmd.Parameters.AddWithValue("@Status", order.Status);
+                    cmd.Parameters.AddWithValue("@FinalAmount", order.FinalAmount);
+                    cmd.Parameters.AddWithValue("@Discount", order.Discount);
+
+                    newOrderId = (int)cmd.ExecuteScalar();
+
+                    foreach (OrderItem item in items)
+                    {
+                        SqlCommand itemCmd = new SqlCommand(@"INSERT INTO OrderItems (OrderID, BookID, Quantity, Price)
+                                                      VALUES (@OrderID, @BookID, @Quantity, @Price)", conn, transaction);
+
+                        itemCmd.Parameters.AddWithValue("@OrderID", newOrderId);
+                        itemCmd.Parameters.AddWithValue("@BookID", item.BookID);
+                        itemCmd.Parameters.AddWithValue("@Quantity", item.Quantity);
+                        itemCmd.Parameters.AddWithValue("@Price", item.Price);
+                        itemCmd.ExecuteNonQuery();
+
+                        // Update stock
+                        SqlCommand stockCmd = new SqlCommand(@"UPDATE Books SET StockQuantity = StockQuantity - @Qty WHERE BookID = @BookID", conn, transaction);
+                        stockCmd.Parameters.AddWithValue("@Qty", item.Quantity);
+                        stockCmd.Parameters.AddWithValue("@BookID", item.BookID);
+                        stockCmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            return newOrderId;
+        }
+
     }
 }

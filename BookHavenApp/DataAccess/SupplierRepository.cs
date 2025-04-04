@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using BookHavenStoreApp.Helpers;
 using BookHavenStoreApp.Models;
 
+
 namespace BookHavenStoreApp.DataAccess
 {
     public class SupplierRepository
@@ -120,7 +121,7 @@ namespace BookHavenStoreApp.DataAccess
                     updateOrderCmd.ExecuteNonQuery();
 
                     // Update book stock
-                    string updateStockQuery = "UPDATE Books SET Stock = Stock + @Quantity WHERE BookID=@BookID";
+                    string updateStockQuery = "UPDATE Books SET StockQuantity = StockQuantity + @Quantity WHERE BookID=@BookID";
                     SqlCommand updateStockCmd = new SqlCommand(updateStockQuery, conn, transaction);
                     updateStockCmd.Parameters.AddWithValue("@Quantity", quantity);
                     updateStockCmd.Parameters.AddWithValue("@BookID", bookId);
